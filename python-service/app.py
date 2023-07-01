@@ -14,30 +14,6 @@ from urllib.parse import quote_plus
 # Encode the password to handle special characters
 password = quote_plus("giggity@1234")
 
-# Establish a PostgreSQL connection using the URI connection string
-# conn = psycopg2.connect(
-#     f"postgresql://username:{password}@host:port/database"
-# )
-
-
-
-
-# Establish a connection to the PostgreSQL database
-# conn = psycopg2.connect(
-#     host="db.ffukbbseygykvzirelar.supabase.co",
-#     port=5432,
-#     user='postgres',
-#     password="giggity@1234",
-#     database="postgres",
-
-# )
-
-# cursor = conn.cursor()
-
-
-
-
-
 # Setup database
 db = SQLDatabase.from_uri(
     f"postgresql+psycopg2://postgres:{password}@db.ffukbbseygykvzirelar.supabase.co:5432/postgres",
