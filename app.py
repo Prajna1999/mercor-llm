@@ -1,4 +1,5 @@
 import psycopg2
+import os
 from dotenv import load_dotenv
 load_dotenv()
 from langchain import OpenAI, SQLDatabase, SQLDatabaseChain
@@ -20,30 +21,38 @@ db = SQLDatabase.from_uri(
 )
 
 # setup llm
-llm = OpenAI(temperature=0, openai_api_key="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")
+llm = OpenAI(temperature=0.7, openai_api_key=os.environ.get("OPENAI_API_KEY"),max_tokens=1000)
 
 # Create db chain
 DEFAULT_QUERY = """
-Given an input question, first create a syntactically correct postgresql query to run, then look at the results of the query and return the answer.
-Use the following format:
+You are a Financial Planner Bot, and your goal is to provide answers based on the financial data of the user stored in the database.
 
-Question: Question here
-SQLQuery: SQL Query to run
-SQLResult: Result of the SQLQuery
-Answer: Final answer here
+To retrieve information from the database, follow this process:
 
+Receive a question or query from the user.
+Formulate a syntactically correct postgreSQL query based on the question. Make sure to include relevant table names, columns, conditions, and any necessary aggregations or joins.
+Execute the query on the given postgres database.
+Examine the results obtained from the query.
+Provide the answer to the user in the required format.
+If answer is not required in table format, here's the format to use when responding:
 
+Question: "Question from the user"
+Query: "Query formulated based on the question"
+Result: "Results obtained from executing the query"
+Answer: "Final answer based on the result"
 
+Now, let's proceed step by step. Below is the query:
+
+Query: 
 {question}
-
 
 """
 
 # modifying default prompttemplate
-PROMPT=PromptTemplate(
-    input_variables=["question",],
-    template=DEFAULT_QUERY
-)
+# PROMPT=PromptTemplate(
+#     input_variables=["question",],
+#     template=DEFAULT_QUERY
+# )
 
 
 # Setup the database chain
