@@ -17,3 +17,13 @@ except ValueError as ve:
     print(f'Error: {ve}')
 except Exception as e:
     print(f'Unexpected error: {e}')
+
+# fetch from db
+try:
+    response = supabase.table('users').select("*").execute()
+    
+except ValueError as ve:
+    print(f'Error: {ve}')
+except Exception as e:
+    print(f'Unexpected error: {e}')
+
