@@ -19,7 +19,7 @@ app.use(cors(
 
 app.use(express.json()); // Middleware for parsing JSON bodies from incoming requests
 
-app.post('/express-endpoint', async (req, res) => {
+app.post('/api/v1/chat', async (req, res) => {
     try {
         const prompt = req.body.text;
         
