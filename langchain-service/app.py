@@ -21,7 +21,7 @@ db = SQLDatabase.from_uri(
 )
 
 llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613", openai_api_key=config['OPENAI_API_KEY'])
-search = SerpAPIWrapper(serpapi_api_key="d83ef4d47ce9c820b3e1e84ac54310ea9af63ce4a7d536f34a394ad85dd1e0f0")
+search = SerpAPIWrapper(serpapi_api_key=config['SERPER_API_KEY'])
 llm_math_chain = LLMMathChain.from_llm(llm=llm, verbose=True)
 db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
 

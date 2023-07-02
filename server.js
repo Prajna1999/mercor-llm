@@ -6,7 +6,7 @@ const cors = require("cors");
 
 const app = express();
 
-pp.set('trust proxy', true);
+app.set('trust proxy', true);
 
 app.use(helmet())
 app.use(cors(
@@ -41,6 +41,9 @@ app.post('/express-endpoint', async (req, res) => {
         res.status(500).json({ error: "An error occurred while processing the prompt" });
     }
 });
+
+
+
 //errrohandling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
